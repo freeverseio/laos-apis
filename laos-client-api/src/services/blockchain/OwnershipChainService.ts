@@ -133,7 +133,7 @@ export class OwnershipChainService {
       { chainId: "1", rpcUrl: process.env.API_RPC_ETHEREUM || "https://ethereum-rpc.publicnode.com" },
       { chainId: "137", rpcUrl: process.env.API_RPC_POLYGON || "https://polygon-rpc.com/" },
       { chainId: "295", rpcUrl: process.env.API_RPC_HEDERA_MAINNET || "https://mainnet.hashio.io/api" },
-      { chainId: "296", rpcUrl: process.env.API_RPC_HEDERA_TESTNET || "https://testnet.hedera.com" },
+      { chainId: "296", rpcUrl: process.env.API_RPC_HEDERA_TESTNET || "https://testnet.hashio.io/api" },
     ];
 
     const chain = chains.find(c => c.chainId === chainId);
@@ -158,8 +158,7 @@ export class OwnershipChainService {
       const deploymentResult: DeploymentResult = await deployer.deployContract(
         ERC721UniversalAbi,
         ERC721UniversalBytecode,
-        [wallet.address, name, symbol, baseURI],
-        null
+        [wallet.address, name, symbol, baseURI]
       );
 
       return deploymentResult.contractAddress;

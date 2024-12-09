@@ -34,7 +34,6 @@ export class CreateCollectionService {
     const { chainId, name, symbol } = input;
 
     try {
-      console.log('Running createCollection without setting gasLimit');
       const client = await ClientService.getClientByKey(apiKey);
       if (!client) {
         throw new Error('Invalid API key');

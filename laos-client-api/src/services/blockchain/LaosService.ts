@@ -5,7 +5,7 @@ import * as EvolutionCollection from "../../abi/EvolutionCollection";
 import EvolutionCollectionAbi from '../../abi/contracts/EvolutionCollection.json';
 import BatchMinterAbi from '../../abi/contracts/BatchMinter.json';
 import EvolutionCollectionFactoryAbi from '../../abi/contracts/EvolutionCollectionFactory.json';
-import { ContractService, laosTransactionOverrides } from "./ContractService";
+import { ContractService } from "./ContractService";
 import { BatchMinterBytecode } from "../../abi/contracts/BatchMinterBytecode";
 
 const eventNameToEventTypeMap = {
@@ -120,8 +120,7 @@ export class LaosService {
       const deploymentResult: DeploymentResult = await deployer.deployContract(
         BatchMinterAbi,
         BatchMinterBytecode,
-        [wallet.address],
-        laosTransactionOverrides
+        [wallet.address]        
       );
       let precompileAddress = '';
       if (!deploymentResult.logs || deploymentResult.logs.length === 0) {
@@ -364,7 +363,7 @@ export class LaosService {
       const minterPvk = JSON.parse(process.env.MINTER_KEYS || '{}')[apiKey];
       const wallet = new ethers.Wallet(minterPvk, this.provider);
       const contract = this.getEthersContract({laosContractAddress: batchMinterAddress, abi: BatchMinterAbi, wallet});                
-      const tx = await contract.setPrecompileAddress(precompileAddress, laosTransactionOverrides);
+      const tx = await contract.setPrecompileAddress(precompileAddress);
       console.log('Transaction sent, waiting for confirmation...');
       const receipt = await tx.wait();
       console.log("Transaction successful! Hash:", receipt.hash);
@@ -396,7 +395,7 @@ export class LaosService {
       console.log('Creating a collection with owner = ', wallet.address);
 
       // Send the transaction to create the collection
-      const tx = await contract.createCollection(wallet.address, laosTransactionOverrides);
+      const tx = await contract.createCollection(wallet.address);
       console.log('Transaction sent, waiting for confirmation...');
       console.log('Transaction hash:', tx.hash);
 
