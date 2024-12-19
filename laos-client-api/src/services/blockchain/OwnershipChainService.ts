@@ -108,7 +108,7 @@ export class OwnershipChainService {
         tx: tx?.hash,
       };
     } catch (error: any) {
-      console.error("BroadcastSelfTransfer Failed:", error.message);
+      console.error("Broadcast Failed:", error.message);
       return {
         status: "failed",
         tx: tx?.hash,
@@ -118,7 +118,7 @@ export class OwnershipChainService {
   }
 
   private broadcastError(error: any, tx: any) {
-    console.error("BroadcastSelfTransfer Failed:", error.message);
+    console.error("Broadcast Failed:", error.message);
     return {
       status: "failed",
       tx: tx?.hash,

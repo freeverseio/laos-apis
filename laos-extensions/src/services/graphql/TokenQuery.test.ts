@@ -2,6 +2,7 @@
 import { TokenQuery } from './TokenQuery';
 import { GqlClient } from './GqlClient';
 import { ApolloQueryResult } from '@apollo/client';
+import { ChainId } from '../../types';
 
 jest.mock('./GqlClient', () => ({
   GqlClient: jest.fn().mockImplementation(() => ({
@@ -58,6 +59,7 @@ describe('TokenQuery - fetchTokensByOwner', () => {
 
   it('should fetch tokens by owner', async () => {
     const input = {
+      chainId: ChainId.POLYGON,
       accountAddress: '0xowneraddress',
       page: { pageSize: 10, sort: [] },
       includeMetadata: true,
@@ -83,6 +85,7 @@ describe('TokenQuery - fetchTokensByOwner', () => {
     });
 
     const input = {
+      chainId: ChainId.POLYGON,
       accountAddress: '0xowneraddress',
       page: { pageSize: 10, sort: [] },
       includeMetadata: true,
@@ -98,6 +101,7 @@ describe('TokenQuery - fetchTokensByOwner', () => {
     gqlClient.query.mockRejectedValue(new Error('GraphQL query failed'));
 
     const input = {
+      chainId: ChainId.POLYGON,
       accountAddress: '0xowneraddress',
       page: { pageSize: 10, sort: [] },
       includeMetadata: true,

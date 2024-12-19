@@ -12,14 +12,16 @@ export class TokenService {
   }
 
   public async getTokenSupplies(body: TokenSupplyInput): Promise<TokenSuppliesResponse> {
+    const chainId = parseInt(body.chainId);
     const response = await this.tokenQuery.fetchTokens(body);
-    const mappedTokens = TokenMapper.mapTokenSupplies(response, body, 137, body.contractAddress);
+    const mappedTokens = TokenMapper.mapTokenSupplies(response, body, chainId, body.contractAddress);
     return mappedTokens;
   }
 
   public async getTokenBalances(body: GetTokenBalancesInput): Promise<TokenBalancesResponse> {
+    const chainId = parseInt(body.chainId);
     const response = await this.tokenQuery.fetchTokensByOwner(body);
-    const mappedTokens = TokenMapper.mapTokenBalances(response, body, 137);
+    const mappedTokens = TokenMapper.mapTokenBalances(response, body, chainId);
     return mappedTokens;
   }
 }
