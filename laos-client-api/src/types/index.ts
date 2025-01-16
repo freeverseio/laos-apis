@@ -7,3 +7,5 @@ export * from "./broadcast";
 export * from "./createCollection";
 export * from "./ipfs";
 export * from "./contract";
+export * from "./graphql/outputs/MintOutput";
+export * from "./graphql/inputs/MintInput";

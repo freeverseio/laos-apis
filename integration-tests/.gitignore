@@ -1,0 +1,11 @@
+/node_modules
+/lib
+/builds
+/dist
+
+/**Versions.json
+
+# Ignore the .env file in the root folder
+/.env
+# IDE files
+/.idea

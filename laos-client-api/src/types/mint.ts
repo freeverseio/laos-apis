@@ -1,3 +1,4 @@
+import { TransactionReceipt, TransactionResponse } from "ethers";
 import { AssetMetadata } from "./asset";
 
 export interface Property {
@@ -51,10 +52,17 @@ export interface MintResult {
   error?: string;
 }
 
+export interface TokenOwners {
+  tokenId: string;
+  owner: string;
+  tokenUri?: string;
+}
+
 export interface BatchMintResult {
   status: string;
-  numberOfTokens: number;
-  tokenIds: string[];
+  numberOfTokens?: number;
+  tokenIds?: string[];
+  tokens?: TokenOwners[];
   contractAddress?: string;
   tx?: string;
   error?: string;
@@ -76,7 +84,21 @@ export interface EvolveBatchResult {
   error?: string;
 }
 
+
+
 export interface EvolveTokenResult {
   tokenId: string;
   tokenUri: string;
+}
+
+export enum TransactionType {
+  TRANSACTION = "TransactionResponse",
+  RECEIPT = "TransactionReceipt",
+  NOT_FOUND = "NOT_FOUND",
+}
+
+export interface LaosTransaction {
+  tx:   TransactionResponse | null
+  receipt: TransactionReceipt | null
+  type: TransactionType
 }
